@@ -1,10 +1,3 @@
-//
-//  UserGuess.h
-//  C++Game
-//
-//  Created by Brendan Murrell on 6/8/21.
-//
-
 #ifndef UserGuess_h
 #define UserGuess_h
 

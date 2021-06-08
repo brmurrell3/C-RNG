@@ -24,16 +24,16 @@ int main(int argc, const char * argv[]) {
     std::cout << "*** Random Number Guessing Game ***\n";
     
     // Defines a constant variable containing the maximum number of users guesses, you may change this if you'd like more or less guesses for the user
-    const int MAX_GUESSES = 5;
+    int maxGuesses = 5;
     
     /*
      Defines C style array (series of numbers) that will contain the values guessed by the user
-     sizeof(UserGuess) * MAX_GUESSES will find the total amount of memory needed to store UserGuess MAX_GUESSES times (in this case it will be the space to store 5 numbers)
+     sizeof(UserGuess) * maxGuesses will find the total amount of memory needed to store UserGuess maxGuesses times (in this case it will be the space to store 5 numbers)
      malloc just tells the compiler to save this amount of space in memory because we will need it later
      Do NOT edit the code to the left of "malloc"
      You may edit the code to the right of "malloc" to change the size of memory needed
     */
-    UserGuess* recordedGuesses = (UserGuess*) malloc(sizeof(UserGuess) * MAX_GUESSES);
+    UserGuess* recordedGuesses = (UserGuess*) malloc(sizeof(UserGuess) * maxGuesses);
 
     
     /*
@@ -53,7 +53,7 @@ int main(int argc, const char * argv[]) {
     int i = 0;
     
     // Continue looping while the user guess is incorrect and our counter is less than the max guesses we give the user
-    while (correctGuess != userInput && i < MAX_GUESSES) {
+    while (correctGuess != userInput && i < maxGuesses) {
         
         // Prompt user for their guess
         std::cout << "Guess a number from " << MIN_VALUE << " to " << MAX_VALUE << ": ";
@@ -96,11 +96,11 @@ int main(int argc, const char * argv[]) {
     std::cout << "\nYou have run out of guesses\n";
     printGuesses(recordedGuesses, sizeof(*recordedGuesses));
     
-    // Program is done, we must free the memory of dynamically allocated space
-     while(recordedGuesses != nullptr) {
-         delete(recordedGuesses);
-         recordedGuesses++;
-     }
+    // Program is done, we must free the memory of  allocated space
+    //for (int i = 0; i < maxGuesses; ++i) {
+     //    delete recordedGuesses[i];
+     //}
+    free(recordedGuesses);
     
     system("pause");
     return 0;
@@ -110,7 +110,7 @@ void addGuess(UserGuess* recordedGuesses, int a) {
     /*
      Initializes a userGuess object on the heap
      This is dynamically allocated so we will need to free the memory later
-     Since we need the data in our array outside the stack frame, we cannot declare it on the stack and thus must be a pointer
+     Since we need the data in our array outside the stack frame of addGuess, we cannot declare it on the stack and must declare it on the heap
      Do NOT change this line of code
      */
     UserGuess *tempGuess = new UserGuess(a);
